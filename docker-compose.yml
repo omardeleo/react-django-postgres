@@ -2,12 +2,23 @@ version: '3.8'
    
 services:
 
+  frontend:
+    labels:
+      shipyard.route: '/'
+    build: 'frontend'
+    environment:
+      CI: 'true'
+      DANGEROUSLY_DISABLE_HOST_CHECK: 'true'
+    volumes:
+      - './frontend/src:/app/src'
+    ports:
+      - '3000:3000'
+
   django:
     labels:
       shipyard.before: 'poetry run python src/manage.py migrate'
-      shipyard.route: '/'
-    build:
-      context: ./backend
+      shipyard.route: '/api'
+    build: 'backend'
     volumes:
       - './backend/src:/srv/src/'
       - './backend/poetry.lock:/srv/poetry.lock/'
