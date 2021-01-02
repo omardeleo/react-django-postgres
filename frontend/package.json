@@ -17,7 +17,7 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
-  "proxy": "http://django:8000",
+  "proxy": "http://django:8080",
   "eslintConfig": {
     "extends": [
       "react-app",
