@@ -5,7 +5,9 @@ services:
   frontend:
     labels:
       shipyard.route: '/'
-    build: 'frontend'
+    build:
+      context: './frontend'
+      dockerfile: Dockerfile
     environment:
       CI: 'true'
       DANGEROUSLY_DISABLE_HOST_CHECK: 'true'
@@ -18,7 +20,9 @@ services:
     labels:
       shipyard.before: 'poetry run python src/manage.py migrate'
       shipyard.route: '/api'
-    build: 'backend'
+    build:
+      context: './backend'
+      dockerfile: Dockerfile
     volumes:
       - './backend/src:/srv/src/'
       - './backend/poetry.lock:/srv/poetry.lock/'
